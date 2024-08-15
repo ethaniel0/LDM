@@ -1,0 +1,35 @@
+%target js
+%variable INDENT 4
+%link std
+
+keyword for (
+    for (let {var} = {start}; {var} < {end}; var += %if(step) {step}% %if(not step) 1%){
+        %indent({%INDENT}) {block}
+    }
+)
+
+keyword if (
+    if ({expr}){
+        %indent({%INDENT}) {block}
+    }
+)
+
+keyword elif (
+    elif ({expr}){
+        %indent({%INDENT}) {block}
+    }
+)
+
+keyword else (
+    else ({expr}){
+        %indent({%INDENT}) {block}
+    }
+)
+
+keyword while (
+    while ({expr}){
+        %indent({%INDENT}) {block}
+    }
+)
+
+

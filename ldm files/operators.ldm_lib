@@ -1,13 +1,37 @@
 operator +
 precedence=8
 structure=binary
-returns=left_type
+returns=left-type
 
 operator -
 precedence=8
 structure=binary
-returns=left_type
+returns=left-type
 
+operator *
+precedence=9
+structure=binary
+returns=left-type
+
+operator /
+precedence=9
+structure=binary
+returns=left-type
+
+operator -
+precedence=10
+structure=unary-right
+returns=right-type
+
+operator <
+precedence=5
+structure=binary
+returns=type bool
+
+operator >
+precedence=5
+structure=binary
+returns=type bool
 
 operator +=
 precedence=1
@@ -15,6 +39,21 @@ structure=binary
 returns=none
 
 operator -=
+precedence=1
+structure=binary
+returns=none
+
+operator <=
+precedence=1
+structure=binary
+returns=none
+
+operator >=
+precedence=1
+structure=binary
+returns=none
+
+operator =
 precedence=1
 structure=binary
 returns=none

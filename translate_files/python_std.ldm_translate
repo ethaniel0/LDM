@@ -2,6 +2,10 @@
 %variable INDENT 4
 %link std
 
+make-object standard(
+{object} = %if(expr) {expr}% %if(not expr) None%
+)
+
 keyword for (
 for {var} in range({start}, {end} %if(step) , {step}% ):
     %indent({%INDENT}) {block}

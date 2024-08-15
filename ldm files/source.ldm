@@ -1,4 +1,4 @@
-int x = 5;
+int x = 5.5
 if x < 6 {
     print(6)
 }

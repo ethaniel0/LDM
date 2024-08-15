@@ -1,7 +1,10 @@
 mod operators_tokenizer;
+mod operator_types;
+mod simple_tokenizer;
 use std::fs;
 
 use operators_tokenizer::parse_operators;
+use simple_tokenizer::tokenize;
 
 enum BracketedType {
     NameWithType,
@@ -32,13 +35,15 @@ struct Keyword {
 
 fn main() {
 
-    let filename = "/Users/ethanhorowitz/Desktop/LDM/ldm files/operators.ldm_lib";
-    let file_contents = fs::read_to_string(filename).unwrap();
+    let operators_filename = "/Users/ethanhorowitz/Desktop/LDM/ldm files/operators.ldm_lib";
+    let operators_file_contents = fs::read_to_string(operators_filename).unwrap();
+    let operators = parse_operators(&operators_filename.to_owned(), &operators_file_contents);
 
-    let tokenized = parse_operators(&filename.to_owned(), &file_contents);
-
-    for operator in tokenized {
-        println!("{}\t{}\t{}", operator.token, operator.precedence, operator.returns.name)
-    }
+    let code_filename = "/Users/ethanhorowitz/Desktop/LDM/ldm files/source.ldm";
+    let code_file_contents = fs::read_to_string(code_filename).unwrap();
+    let tokens = tokenize(&code_file_contents, &operators);
     
+    for token in tokens {
+        println!("{}\t{:?}", token.token, token.token_type)
+    }
 }

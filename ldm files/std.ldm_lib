@@ -1,11 +1,13 @@
 /*
 
     Types of definitions:
-    - keyword
-    - operator
-    - type-basic
-    - keyword-object
+    - keyword (keyword)
+    - operator (operator)
+    - type-basic (primitive type, has no struct-type nature to it)
+    - keyword-object (makes a structure that can be operated on)
+    - make-object (defines variables, MUST HAVE: type as typename, object name as object)
     - object?
+    
 
     preprocessor instructions:
         keyword:
@@ -80,32 +82,12 @@ keyword-object function (
     %structure 
         function {name name} (%vararg(name args sep ,) {type %name}%): {typename type} {block block}
     %
-
-    %operator (,)
 )
 
-// OPERATORS
- 
-operator +
-precedence=3
-structure=binary
-returns=left_type
+// OBJECT DECLARATION
+make-object standard(
+    %structure
+        {type object} %optional = {expression expr}%
+    %
+)
 
-operator -
-precedence=3
-structure=binary or unary-left
-returns=left_type
-
-operator ?
-precedence=1
-structure=%custom %before(operator :) {value bool} ? {value option1}%
-returns=%custom option1
-
-operator :
-precedence=1
-structure=%custom %after(operator ?) : {value option2}
-returns=%custom option2
-
-// TYPES
-
-type-basic char

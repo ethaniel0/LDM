@@ -1,0 +1,19 @@
+int x = 5
+if x < 6 {
+    print(6)
+}
+
+-------------
+
+MakeObject(
+    type=int
+    object=x
+    expr=5
+)
+
+If(
+    expr=LT(x, 6)
+    block={
+        
+    }
+)

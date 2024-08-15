@@ -1,78 +1,4 @@
-pub struct OperatorStructure {
-
-}
-impl OperatorStructure {
-    pub fn binary(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-    pub fn unary_left(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-    pub fn unary_right(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-    pub fn custom(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-}
-
-pub struct ValueType {
-    pub name: String,
-    pub is_type: bool
-}
-impl ValueType {
-    pub fn left_type() -> Self {
-        ValueType {
-            name: "left_type".to_owned(),
-            is_type: false
-        }
-    }
-    pub fn right_type() -> Self {
-        ValueType {
-            name: "right_type".to_owned(),
-            is_type: false
-        }
-    }
-    pub fn none() -> Self {
-        ValueType {
-            name: "none".to_owned(),
-            is_type: false
-        }
-    }
-    pub fn custom(name: &String, is_type: bool) -> Self {
-        ValueType {
-            name: name.to_owned(),
-            is_type
-        }
-    }
-}
-
-pub struct Operator {
-    pub token: String,
-    pub precedence: usize,
-    pub structure: OperatorStructure,
-    pub returns: ValueType
-}
-impl Operator {
-    pub fn new() -> Self{
-        let token = "".to_owned();
-        let structure = OperatorStructure::binary(&token);
-        Operator {
-            token,
-            precedence: 0,
-            structure,
-            returns: ValueType::left_type()
-        }
-    }
-}
+use crate::operator_types::*;
 
 fn parse_operator_name(line: &str, line_count: usize, filename: &String) -> String {
     let parts: Vec<&str> = line.split(" ").collect();
@@ -131,8 +57,8 @@ fn parse_operator_returns(line: &str, line_count: usize, filename: &String) -> V
 
     let split: Vec<&str> = returns.split(" ").collect();
 
-    if returns == "left_type" { return ValueType::left_type() }
-    else if returns == "right_type" { return ValueType::right_type() }
+    if returns == "left-type" { return ValueType::left_type() }
+    else if returns == "right-type" { return ValueType::right_type() }
     else if returns == "none" { return ValueType::none() }
     else if split.len() == 2 {
         if split[0] == "type" {
