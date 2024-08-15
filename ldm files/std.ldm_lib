@@ -1,0 +1,111 @@
+/*
+
+    Types of definitions:
+    - keyword
+    - operator
+    - type-basic
+    - keyword-object
+    - object?
+
+    preprocessor instructions:
+        keyword:
+            %structure %
+                %optional %
+                %after(Type __type__ or Type __type__ or ...) %
+                %vararg(name __name sep __sep) % (with %name)
+                %nospace
+            
+            %operator
+        
+        operator:
+            %custom
+            %before(operator __op_name__) %
+            %after(operator __op_name__) %
+        
+    bracket instructions:
+        keyword:
+            {type __typename__}:  
+            {typed Type __varname__}: varname associated with a variable of type Type
+            {block __blockname__}: code block
+            {expression __exprname__}: expression
+            {name __name__}: a name specifier
+            {typename Type}
+        
+        operator:
+            {value __value_name__}
+    
+    operator structures:
+        binary
+        unary-right
+        unary-left
+        %custom ...
+
+*/
+
+// KEYWORDS
+
+keyword for (
+    %structure 
+        for {type var} in {typed int start} %nospace .. %nospace {typed int end} %optional %nospace ..{typed int step}% {block block}
+    %
+)
+
+keyword if (
+    %structure
+        if {expression expr} {block block}
+    %
+)
+
+keyword elif (
+    %structure
+        %after(keyword if) elif {expression expr} {block block}
+    %
+)
+
+keyword else (
+    %structure
+        %after(keyword if or keyword elif) else {expression expr} {block block}
+    %
+)
+
+keyword while (
+    %structure
+        while {expression expr} {block block}
+    %
+)
+
+// KEYWORD OBJECTS
+
+keyword-object function (
+    %structure 
+        function {name name} (%vararg(name args sep ,) {type %name}%): {typename type} {block block}
+    %
+
+    %operator (,)
+)
+
+// OPERATORS
+ 
+operator +
+precedence=3
+structure=binary
+returns=left_type
+
+operator -
+precedence=3
+structure=binary or unary-left
+returns=left_type
+
+operator ?
+precedence=1
+structure=%custom %before(operator :) {value bool} ? {value option1}%
+returns=%custom option1
+
+operator :
+precedence=1
+structure=%custom %after(operator ?) : {value option2}
+returns=%custom option2
+
+// TYPES
+
+type-basic char

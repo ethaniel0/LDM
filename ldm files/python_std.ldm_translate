@@ -1,0 +1,30 @@
+%target python
+%variable INDENT 4
+%link std
+
+keyword for (
+for {var} in range({start}, {end} %if(step) , {step}% ):
+    %indent({%INDENT}) {block}
+)
+
+keyword if (
+if {expr}:
+    %indent({%INDENT}) {block}
+)
+
+keyword elif (
+elif {expr}:
+    %indent({%INDENT}) {block}
+)
+
+keyword else (
+else {expr}:
+    %indent({%INDENT}) {block}
+)
+
+keyword while (
+while {expr}:
+    %indent({%INDENT}) {block}
+)
+
+
