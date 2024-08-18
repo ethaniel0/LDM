@@ -201,6 +201,7 @@ impl CommandItem {
 #[derive(Debug, Clone)]
 pub struct Command {
     pub name: String,
+    pub line_number: usize,
     pub args: Vec<ConfigToken>,
     pub inner: Vec<CommandItem>
 }
@@ -243,9 +244,9 @@ impl<'a> ConfigItemBuilder<'a> {
             self.index += 1;
         }
 
-        if specifiers.len() == 0 {
-            panic!("Expected at least one specifier, got none on line {}", self.tokens[self.index].line);
-        }
+        // if specifiers.len() == 0 {
+        //     panic!("Expected at least one specifier, got none on line {}", self.tokens[self.index].line);
+        // }
         if self.index >= self.tokens.len() {
             panic!("Expected a ( on line {}, got end of file", starting_line);
         }
@@ -278,6 +279,7 @@ impl<'a> ConfigItemBuilder<'a> {
                 panic!("Unexpected token: {} on line {}", token.token, token.line);
             }
             let name = token.token[1..].to_owned();
+            let name_line = token.line;
             index += 1;
 
             if index >= tokens.len() {
@@ -288,6 +290,7 @@ impl<'a> ConfigItemBuilder<'a> {
                 // no args or inner, return command
                 commands.push(Command{
                     name,
+                    line_number: name_line,
                     args: Vec::<ConfigToken>::new(),
                     inner: Vec::<CommandItem>::new()
                 });
@@ -318,6 +321,7 @@ impl<'a> ConfigItemBuilder<'a> {
             if index >= tokens.len() || tokens[index].token_type == ConfigTokenType::Percent {
                 commands.push(Command{
                     name,
+                    line_number: name_line,
                     args,
                     inner: Vec::<CommandItem>::new()
                 });
@@ -333,6 +337,7 @@ impl<'a> ConfigItemBuilder<'a> {
                 // no inner, return command
                 commands.push(Command{
                     name,
+                    line_number: name_line,
                     args: Vec::<ConfigToken>::new(),
                     inner: Vec::<CommandItem>::new()
                 });
@@ -402,6 +407,7 @@ impl<'a> ConfigItemBuilder<'a> {
 
             commands.push(Command{
                 name,
+                line_number: name_line,
                 args,
                 inner
             });

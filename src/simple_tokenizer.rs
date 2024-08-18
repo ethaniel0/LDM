@@ -1,4 +1,4 @@
-use crate::operator_types::Operator;
+use crate::{config_tokenizer::CommandItem, keywords_tokenizer::Keyword, operator_types::Operator};
 
 #[derive(Debug)]
 pub enum SimpleTokenType {
@@ -15,6 +15,11 @@ pub enum SimpleTokenType {
     LPAREN
 }
 
+pub struct LibItems {
+    pub keywords: Vec<Keyword>,
+    pub operators: Vec<Operator>,
+}
+
 pub struct SimpleToken {
     pub token: String,
     pub token_type: SimpleTokenType
@@ -27,7 +32,7 @@ fn get_token(substr: &String, in_str: bool, in_number: bool) {
     // else if ()
 }
 
-pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
+pub fn tokenize(source: &String, lib_items: &LibItems) -> Vec<SimpleToken>{
     let mut tokens = Vec::<SimpleToken>::new();
 
     let mut in_str = false;
@@ -45,7 +50,7 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
     let whitespace = " \t\n";
 
 
-    let mut possible_operators = operators.clone();
+    let mut possible_operators = lib_items.operators.clone();
 
     let chars: Vec<char> = source.chars().collect();
     let mut char_ind = 0;
@@ -114,7 +119,7 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
                 in_float = false;
                 in_number = false;
                 in_operator = false;
-                possible_operators = operators.clone();
+                possible_operators = lib_items.operators.clone();
             }
             else {
                 running_str.push(c);
@@ -147,7 +152,7 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
                 in_float = false;
                 in_number = false;
                 in_operator = false;
-                possible_operators = operators.clone();
+                possible_operators = lib_items.operators.clone();
                 char_ind -= 1;
             }
             continue;
@@ -158,9 +163,12 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
                 running_str.push(c);
             }
             else {
+
+                let is_keyword = lib_items.keywords.iter().any(|x| x.name == running_str);
+
                 tokens.push(SimpleToken {
                     token: running_str.to_owned(),
-                    token_type: SimpleTokenType::Identifier
+                    token_type: if is_keyword { SimpleTokenType::Keyword } else { SimpleTokenType::Identifier }
                 });
                 running_str.clear();
                 in_str = false;
@@ -168,7 +176,7 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
                 in_float = false;
                 in_number = false;
                 in_operator = false;
-                possible_operators = operators.clone();
+                possible_operators = lib_items.operators.clone();
                 char_ind -= 1;
             }
             continue;
@@ -206,7 +214,7 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
                 in_float = false;
                 in_number = false;
                 in_operator = false;
-                possible_operators = operators.clone();
+                possible_operators = lib_items.operators.clone();
                 char_ind -= 1;
             }
         }

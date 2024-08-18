@@ -28,7 +28,7 @@ pub fn config_to_keyword(config_item: &ConfigItem) -> Option<Keyword> {
     }
 
     if config_item.specifiers.len() == 0 {
-        panic!("Keyword must have at least one specifier");
+        panic!("Keyword must have at least one specifier (e.g. name)");
     }
 
     let name = config_item.specifiers.get(0).unwrap().token.clone();
