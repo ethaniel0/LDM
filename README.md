@@ -102,6 +102,6 @@ make_object standard(
 )
 
 ```
-Notice the names for each structure - var, start, end, and step in for; left and right in the + operator; and object and expr in make_object - are used with the {=\<name\>} brace expression.
-The %indent(\<#\>)% expression is used to add indents to all lines within a code block, with `{%name%}` being used to retrieve a variable defined at the start of the file. 
+Notice the names for each structure - var, start, end, and step in for; left and right in the + operator; and object and expr in make_object - are used with the `{=<name>} `brace expression.
+The `%indent(<#>)%` expression is used to add indents to all lines within a code block, with `{%name%}` being used to retrieve a variable defined at the start of the file. 
 
