@@ -88,7 +88,7 @@ keyword-object function (
 // OBJECT DECLARATION
 make-object standard (
     %structure
-        {type object} %optional = {expression expr}%
+        {typename typename} {name object} %optional = {expression expr}%
     %
 )
 

@@ -1,6 +1,6 @@
 keyword for (
     %structure 
-        for {type var} in {typed int start} %nospace% .. %nospace% {typed int end} %optional %nospace% ..{typed int step}% {block block}
+        for {typename typename is int} {name var} in {typed int start} %nospace% .. %nospace% {typed int end} %optional %nospace% ..{typed int step}% {block block}
     %
 )
 
@@ -32,7 +32,7 @@ keyword while (
 
 make_variable (
     %structure
-        {type object} %optional = {expression expr}%
+        {typename typename} {name varname} %optional = {expression expr}%
     %
 )
 

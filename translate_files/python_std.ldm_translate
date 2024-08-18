@@ -2,8 +2,8 @@
 %variable INDENT 4
 %link std
 
-make-object standard(
-{=object} = %if(expr) {=expr}% %if(not expr) None%
+make_variable standard(
+{=name} = %if(expr) {=expr}% %if(not expr) None%
 )
 
 keyword for (

@@ -1,33 +1,6 @@
 use crate::config_tokenizer::{Command, CommandItem, CommandItemType, ConfigItem};
 
 #[derive(Clone)]
-pub struct OperatorStructure {
-
-}
-impl OperatorStructure {
-    pub fn binary(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-    pub fn unary_left(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-    pub fn unary_right(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-    pub fn custom(operator: &String) -> Self {
-        OperatorStructure{
-
-        }
-    }
-}
-
-#[derive(Clone)]
 pub struct ValueType {
     pub name: String,
     pub is_type: bool
