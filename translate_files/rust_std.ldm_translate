@@ -3,32 +3,32 @@
 %link std
 
 keyword for (
-    for {var} in {start}..{end}%if(step)..{step}%{
-        %indent({%INDENT}) {block}
+    for {=var} in {=start}..{=end}%if(step)..{=step}%{
+        %indent({%INDENT}) {=block}
     }
 )
 
 keyword if (
-    if {expr}{
-        %indent({%INDENT}) {block}
+    if {=expr}{
+        %indent({%INDENT}) {=block}
     }
 )
 
 keyword elif (
-    elif {expr}{
-        %indent({%INDENT}) {block}
+    elif {=expr}{
+        %indent({%INDENT}) {=block}
     }
 )
 
 keyword else (
-    else {expr}{
-        %indent({%INDENT}) {block}
+    else {=expr}{
+        %indent({%INDENT}) {=block}
     }
 )
 
 keyword while (
-    while {expr}{
-        %indent({%INDENT}) {block}
+    while {=expr}{
+        %indent({%INDENT}) {=block}
     }
 )
 

@@ -114,3 +114,7 @@ pub fn parse_operators(filename: &String, source: &String) -> Vec<Operator>{
     operators
 }
 
+pub fn parse_operators_from_file(filename: &String) -> Vec<Operator> {
+    let file_contents = std::fs::read_to_string(filename).unwrap();
+    parse_operators(filename, &file_contents)
+}

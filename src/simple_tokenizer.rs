@@ -6,6 +6,7 @@ pub enum SimpleTokenType {
     Number,
     String,
     Operator,
+    Keyword,
 
     RBRACKET,
     LBRACKET,
@@ -75,31 +76,16 @@ pub fn tokenize(source: &String, operators: &Vec<Operator>) -> Vec<SimpleToken>{
                 in_identifier = true;
                 continue;
             }
-            if c == '{' {
+            if "{}()".contains(c){
                 tokens.push(SimpleToken {
-                    token: "{".to_owned(),
-                    token_type: SimpleTokenType::LBRACKET
-                });
-                continue;
-            }
-            if c == '}' {
-                tokens.push(SimpleToken {
-                    token: "}".to_owned(),
-                    token_type: SimpleTokenType::RBRACKET
-                });
-                continue;
-            }
-            if c == '(' {
-                tokens.push(SimpleToken {
-                    token: "(".to_owned(),
-                    token_type: SimpleTokenType::LPAREN
-                });
-                continue;
-            }
-            if c == ')' {
-                tokens.push(SimpleToken {
-                    token: ")".to_owned(),
-                    token_type: SimpleTokenType::RPAREN
+                    token: c.to_string(),
+                    token_type: match c {
+                        '{' => SimpleTokenType::LBRACKET,
+                        '}' => SimpleTokenType::RBRACKET,
+                        '(' => SimpleTokenType::LPAREN,
+                        ')' => SimpleTokenType::RPAREN,
+                        _ => panic!("Unknown bracket at line {}, {}", line, index)
+                    }
                 });
                 continue;
             }

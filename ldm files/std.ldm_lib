@@ -6,6 +6,7 @@
     - type-basic (primitive type, has no struct-type nature to it)
     - keyword-object (makes a structure that can be operated on)
     - make-object (defines variables, MUST HAVE: type as typename, object name as object)
+    - set-object (sets variable)
     - object?
     
 
@@ -48,7 +49,7 @@
 
 keyword for (
     %structure 
-        for {type var} in {typed int start} %nospace .. %nospace {typed int end} %optional %nospace ..{typed int step}% {block block}
+        for {typename typename is int} {name var} in {typed int start} %nospace .. %nospace {typed int end} %optional %nospace ..{typed int step}% {block block}
     %
 )
 
@@ -80,14 +81,20 @@ keyword while (
 
 keyword-object function (
     %structure 
-        function {name name} (%vararg(name args sep ,) {type %name}%): {typename type} {block block}
+        function {name name} (%vararg(name args sep ,) {typename typename} {name name}%): {typename type} {block block}
     %
 )
 
 // OBJECT DECLARATION
-make-object standard(
+make-object standard (
     %structure
         {type object} %optional = {expression expr}%
+    %
+)
+
+set-object standard (
+    %structure
+        {name object} = {expression expr}%
     %
 )
 

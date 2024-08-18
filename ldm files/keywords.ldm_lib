@@ -1,0 +1,31 @@
+keyword for (
+    %structure 
+        for {type var} in {typed int start} %nospace% .. %nospace% {typed int end} %optional %nospace% ..{typed int step}% {block block}
+    %
+)
+
+keyword if (
+    %structure
+        if {expression expr} {block block}
+    %
+)
+
+keyword elif (
+    %structure
+        %after(keyword if) elif {expression expr} {block block} %
+    %
+)
+
+keyword else (
+    %structure
+        %after(keyword if or keyword elif) 
+            else {expression expr} {block block}
+        %
+    %
+)
+
+keyword while (
+    %structure
+        while {expression expr} {block block}
+    %
+)
